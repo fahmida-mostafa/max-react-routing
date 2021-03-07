@@ -28,23 +28,26 @@ class Posts extends Component {
             });
     }
     postSelectedHandler = (id) => {
-        this.setState({selectedPostId: id});
+        this.props.history.push({ pathname: "/" + id });
+        // this.props.history.push("/" + id );
     }
     render() { 
         let posts = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
         if (!this.state.error) {
             posts = this.state.posts.map(post => {
                 return (
-                    <Link
-                        to={'/' + post.id}
-                        key={post.id}>
-                        <Post 
+                    // <Link
+                    //     to={'/' + post.id}
+                    //     key={post.id}>
+                        <Post
+                            key={post.id}
                             title={post.title} 
                             author={post.author}
                             // {...this.props}
                             // match={this.props.match}
                             clicked={() => this.postSelectedHandler(post.id)} />
-                    </Link>);
+                    // </Link>
+                );
             });
         }
         return (
